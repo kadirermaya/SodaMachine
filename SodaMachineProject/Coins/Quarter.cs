@@ -15,6 +15,11 @@ namespace SodaMachineProject
             name = "Quarter";
             value = 0.25;
         }
+
+        public Quarter(double quarterAmount)
+        {
+            value = 0.25 * quarterAmount;
+        }
         // MEMBER METHODS (CAN DO)
     }
 }

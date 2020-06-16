@@ -16,6 +16,11 @@ namespace SodaMachineProject
             name = "Dime";
             value = 0.10;
         }
+
+        public Dime(double dimeAmount)
+        {
+            value = 0.10 * dimeAmount;
+        }
         // MEMBER METHODS (CAN DO)
     }
 }

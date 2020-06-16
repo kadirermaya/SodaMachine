@@ -15,6 +15,11 @@ namespace SodaMachineProject
             name = "Nickel";
             value = 0.05;
         }
+
+        public Nickel(double nickelAmout)
+        {
+            value = 0.05 * nickelAmout;
+        }
         // MEMBER METHODS (CAN DO)
     }
 }
