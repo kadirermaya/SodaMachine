@@ -10,6 +10,11 @@ namespace SodaMachineProject
     {
         // MEMBER VARIABLES (HAS A)
         // CONSTRUCTOR (SPAWNER)
+        public Cola()
+        {
+            name = "Pepsi";
+            cost = 0.35;
+        }
         // MEMBER METHODS (CAN DO)
     }
 }

@@ -10,6 +10,11 @@ namespace SodaMachineProject
     {
         // MEMBER VARIABLES (HAS A)
         // CONSTRUCTOR (SPAWNER)
+        public RootBeer()
+        {
+            name = "Bundaberg Root Beer";
+            cost = 0.60;
+        }
         // MEMBER METHODS (CAN DO)
     }
 }

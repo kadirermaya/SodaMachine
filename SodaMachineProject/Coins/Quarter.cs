@@ -10,6 +10,11 @@ namespace SodaMachineProject
     {
         // MEMBER VARIABLES (HAS A)
         // CONSTRUCTOR (SPAWNER)
+        public Quarter()
+        {
+            name = "Quarter";
+            value = 0.25;
+        }
         // MEMBER METHODS (CAN DO)
     }
 }
