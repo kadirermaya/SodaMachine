@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SodaMachineProject
 {
-    class Peny
+    class Quarter : Coin
     {
         // MEMBER VARIABLES (HAS A)
         // CONSTRUCTOR (SPAWNER)

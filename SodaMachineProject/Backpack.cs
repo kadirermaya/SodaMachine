@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace SodaMachineProject
 {
-    class Backpack
+    public class Backpack
     {
-       // MEMBER VARIABLES (HAS A)
-       // CONSTRUCTOR (SPAWNER)
+        // MEMBER VARIABLES (HAS A)
+        public List<Can> cans;
+        // CONSTRUCTOR (SPAWNER)
+        public Backpack()
+        {
+            cans = new List<Can>();
+        }
        // MEMBER METHODS (CAN DO)
     }
 }

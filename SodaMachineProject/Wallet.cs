@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 
 namespace SodaMachineProject
 {
-    class Wallet
+    public class Wallet
     {
         // MEMBER VARIABLES (HAS A)
+        public List<Coin> coins;
+        public Card card;
         // CONSTRUCTOR (SPAWNER)
+        public Wallet()
+        {
+            coins = new List<Coin>();
+            card = new Card();
+        }
         // MEMBER METHODS (CAN DO)
     }
 }

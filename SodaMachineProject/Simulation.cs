@@ -9,7 +9,14 @@ namespace SodaMachineProject
     class Simulation
     {
         // MEMBER VARIABLES (HAS A)
+        public SodaMachine sodaMachine;
+        public Customer customer;
         // CONSTRUCTOR (SPAWNER)
+        public Simulation()
+        {
+            customer = new Customer();
+            sodaMachine = new SodaMachine();
+        }
         // MEMBER METHODS (CAN DO)
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SodaMachineProject
 {
-    class Dime
+    class OrangeSoda : Can
     {
         // MEMBER VARIABLES (HAS A)
         // CONSTRUCTOR (SPAWNER)

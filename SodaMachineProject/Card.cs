@@ -6,10 +6,29 @@ using System.Threading.Tasks;
 
 namespace SodaMachineProject
 {
-    class Card
+    public class Card
     {
         // MEMBER VARIABLES (HAS A)
+        private double availableFunds;
+        public double AvailableFunds
+        {
+            get 
+            {
+                return availableFunds;
+            }
+            set 
+            {
+                availableFunds = value;
+            }
+        }
         // CONSTRUCTOR (SPAWNER)
+        public Card()
+        {
+            availableFunds = 2000;
+        }
+
         // MEMBER METHODS (CAN DO)
+
+
     }
 }
