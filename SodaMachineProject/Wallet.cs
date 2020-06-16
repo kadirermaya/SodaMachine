@@ -16,7 +16,17 @@ namespace SodaMachineProject
         {
             coins = new List<Coin>();
             card = new Card();
+            AddCoinsToWallet();
         }
         // MEMBER METHODS (CAN DO)
+
+        // this method adds 5 dollars in a wallet
+        public void AddCoinsToWallet()
+        {
+            coins.Add(new Quarter(12));  //3 Dollars
+            coins.Add(new Dime(10));    //1 Dollars
+            coins.Add(new Nickel(10));  //50 cents
+            coins.Add(new Peny(50));    //50 cents
+        }
     }
 }
