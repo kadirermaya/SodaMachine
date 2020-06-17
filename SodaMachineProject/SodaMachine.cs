@@ -106,15 +106,15 @@ namespace SodaMachineProject
             {
                 case "1":
                     can = inventory.Find(x => x.name == "Bundaberg Root Beer");
-                    DispenseSoda(can);
+                    
                     return can;
                 case "2":
                     can = inventory.Find(x => x.name == "Pepsi");
-                    DispenseSoda(can);
+                    
                     return can;
                 case "3":
                     can = inventory.Find(x => x.name == "Fanta");
-                    DispenseSoda(can);
+                    
                     return can;
                 default :
                     Console.WriteLine("Please pick between 1-3");
@@ -122,6 +122,16 @@ namespace SodaMachineProject
             }
 
         }
+
+        // Adds deposit to register
+        public void AddDepositToRegister(List<Coin> deposit)
+        {
+            for (int i = 0; i < deposit.Count; i++)
+            {
+                register.Add(deposit[i]);
+            }
+        }
+        
     }
 }
         
