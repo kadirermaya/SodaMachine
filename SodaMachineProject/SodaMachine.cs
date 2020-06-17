@@ -46,7 +46,7 @@ namespace SodaMachineProject
 
             for (int i = 0; i < 50; i++)
             {
-                register.Add(new Peny());
+                register.Add(new Penny());
 
             }
         }
@@ -131,9 +131,115 @@ namespace SodaMachineProject
                 register.Add(deposit[i]);
             }
         }
-        
+
+       // gives change to user and removes change from register
+        public List<Coin> GiveChange(double changeToGive)//double parameter?
+        {
+            List<Coin> changeCoinList = new List<Coin>();
+            while (changeToGive > 0)
+            {
+                if (changeToGive / 0.25 >= 1)
+                {
+                    if (changeToGive % 0.25 == 0)
+                    {
+                        for (int i = 0; i < changeToGive / 0.25; i++)
+                        {
+                            Coin coin = register.Find(x => x.name == "Quarter");
+                            changeCoinList.Add(coin);
+                            changeToGive -= 0.25;
+                            register.Remove(coin);
+                        }
+
+                    }
+                    else
+                    {
+                        double floor = Math.Floor(changeToGive / 0.25);
+                        for (int i = 0; i < floor; i++)
+                        {
+                            Coin coin = register.Find(x => x.name == "Quarter");
+                            changeCoinList.Add(coin);
+                            changeToGive -= 0.25;
+                            register.Remove(coin);
+                        }
+                    }
+                   
+                }
+                else if (changeToGive / 0.10 >= 1)
+                {
+                    if (changeToGive % 0.10 == 0)
+                    {
+                        for (int i = 0; i < changeToGive / 0.10; i++)
+                        {
+                            Coin coin = register.Find(x => x.name == "Dime");
+                            changeCoinList.Add(coin);
+                            changeToGive -= 0.10;
+                            register.Remove(coin);
+                        }
+
+                    }
+                    else
+                    {
+                        double floor = Math.Floor(changeToGive / 0.10);
+                        for (int i = 0; i < floor; i++)
+                        {
+                            Coin coin = register.Find(x => x.name == "Dime");
+                            changeCoinList.Add(coin);
+                            changeToGive -= 0.10;
+                            register.Remove(coin);
+                        }
+                    }
+                }
+                else if (changeToGive / 0.05 >= 1)
+                {
+                    if (changeToGive % 0.05 == 0)
+                    {
+                        for (int i = 0; i < changeToGive / 0.05; i++)
+                        {
+                            Coin coin = register.Find(x => x.name == "Nickel");
+                            changeCoinList.Add(coin);
+                            changeToGive -= 0.05;
+                            register.Remove(coin);
+                        }
+
+                    }
+                    else
+                    {
+                        double floor = Math.Floor(changeToGive / 0.05);
+                        for (int i = 0; i < floor; i++)
+                        {
+                            Coin coin = register.Find(x => x.name == "Nickel");
+                            changeCoinList.Add(coin);
+                            changeToGive -= 0.05;
+                            register.Remove(coin);
+                        }
+                    }
+
+                }
+                else if (changeToGive / 0.01 >= 1)
+                {
+                    
+                        double floor = Math.Floor(changeToGive / 0.01);
+                        for (int i = 0; i < floor; i++)
+                        {
+                            Coin coin = register.Find(x => x.name == "Penny");
+                            changeCoinList.Add(coin);
+                            changeToGive -= 0.01;
+                            register.Remove(coin);
+                        }
+                   
+                    //look at parameter and turn it into a list of coins with that value
+                }
+            }   
+                return changeCoinList;
+        }
     }
 }
+
+            
+        
+
+    
+
         
 
 
