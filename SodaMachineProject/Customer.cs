@@ -12,13 +12,16 @@ namespace SodaMachineProject
         public Wallet wallet;
         public Backpack backpack;
         public List<Coin> deposit;
+        public double depositAmount;
         public string userInput;
+        
         // CONSTRUCTOR (SPAWNER)
         public Customer()
         {
             wallet = new Wallet();
             backpack = new Backpack();
             deposit = new List<Coin>();
+            depositAmount = 0;
         }
         // MEMBER METHODS (CAN DO)
         
@@ -72,31 +75,32 @@ namespace SodaMachineProject
                 case "1": 
                     coin = wallet.coins.Find(x => x.name == "Quarter");
                     deposit.Add(coin);
+                    CalculateDeposit();
                     RemoveCoinFromWallet(coin);
-                    Console.WriteLine($"You inserted {wallet.coins.Find(x => x.name == "Quarter").Value}");
                     return coin;
                 case "2":
                     coin = wallet.coins.Find(x => x.name == "Dime");
                     deposit.Add(coin);
+                    CalculateDeposit();
                     RemoveCoinFromWallet(coin);
-                    Console.WriteLine($"You inserted {wallet.coins.Find(x => x.name == "Dime").Value}");
                     return coin;
                 case "3":
                     coin = wallet.coins.Find(x => x.name == "Nickel");
                     deposit.Add(coin);
+                    CalculateDeposit();
                     RemoveCoinFromWallet(coin);
-                    Console.WriteLine($"You inserted {wallet.coins.Find(x => x.name == "Nickel").Value}");
                     return coin;
                 case "4":
                     coin = wallet.coins.Find(x => x.name == "Peny");
                     deposit.Add(coin);
+                    CalculateDeposit();
                     RemoveCoinFromWallet(coin);
-                    Console.WriteLine($"You inserted {wallet.coins.Find(x => x.name == "Peny").Value}");
                     return coin;
 
                 default:
                     Console.WriteLine("Please pick money to deposit.");
                     return InsertMoney(coin);
+
             }
             
         }
@@ -105,6 +109,16 @@ namespace SodaMachineProject
         public void RemoveCoinFromWallet(Coin coin)
         {
             wallet.coins.Remove(coin);
+        }
+        // calculates deposit
+        public double CalculateDeposit()
+        {
+            depositAmount = 0;
+            for (int i = 0; i < deposit.Count; i++)
+            {
+                depositAmount += deposit[i].Value;
+            }
+            return depositAmount;
         }
     }
 }
