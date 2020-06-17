@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SodaMachineProject
 {
-    class Simulation
+    public class Simulation
     {
         // MEMBER VARIABLES (HAS A)
         public SodaMachine sodaMachine;
@@ -16,6 +16,15 @@ namespace SodaMachineProject
         {
             customer = new Customer();
             sodaMachine = new SodaMachine();
+        }
+    
+        public void Run()
+        {
+            sodaMachine.WelcomeScreen();
+            sodaMachine.DisplayInventory();
+            customer.InsertMoney(customer.PickPayment());
+
+            
         }
         // MEMBER METHODS (CAN DO)
     }

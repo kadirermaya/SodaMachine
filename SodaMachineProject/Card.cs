@@ -9,17 +9,14 @@ namespace SodaMachineProject
     public class Card
     {
         // MEMBER VARIABLES (HAS A)
-        private double availableFunds;
+        protected double availableFunds;
         public double AvailableFunds
         {
             get 
             {
                 return availableFunds;
             }
-            set 
-            {
-                availableFunds = value;
-            }
+           
         }
         // CONSTRUCTOR (SPAWNER)
         public Card()

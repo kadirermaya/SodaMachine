@@ -10,6 +10,9 @@ namespace SodaMachineProject
     {
         static void Main(string[] args)
         {
+            Simulation simulation = new Simulation();
+            simulation.Run();
+            Console.ReadLine();
         }
     }
 }

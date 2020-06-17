@@ -11,6 +11,7 @@ namespace SodaMachineProject
         // MEMBER VARIABLES (HAS A)
         protected double cost;
         public string name;
+       
 
         public double Cost 
         {
@@ -18,15 +19,8 @@ namespace SodaMachineProject
             {
                 return cost;
             }
-            set
-            {
-                Cost = value;
-            } 
-        
-        
-        
-        
-        
+                
+                
         }
         // CONSTRUCTOR (SPAWNER)
         // MEMBER METHODS (CAN DO)

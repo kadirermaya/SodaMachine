@@ -15,10 +15,7 @@ namespace SodaMachineProject
             name = "Peny";
             value = 0.01;
         }
-        public Peny(double penyAmount)
-        {
-            value = 0.01 * penyAmount;
-        }
+       
         // MEMBER METHODS (CAN DO)
     }
 }

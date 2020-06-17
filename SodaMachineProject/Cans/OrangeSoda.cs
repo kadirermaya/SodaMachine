@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SodaMachineProject
 {
-    class OrangeSoda : Can
+    class Fanta : Can
     {
         // MEMBER VARIABLES (HAS A)
         // CONSTRUCTOR (SPAWNER)
-        public OrangeSoda()
+        public Fanta()
         {
             name = "Fanta";
             cost = 0.06;
