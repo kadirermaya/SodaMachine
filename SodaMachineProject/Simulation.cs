@@ -41,13 +41,19 @@ namespace SodaMachineProject
                 }
             }
             Can choosenSoda = sodaMachine.ChooseASoda();
-            
+           
             // this statement gives deposit back if there is no soda in the machine
             if (choosenSoda == null)
             {
-                Console.WriteLine($"We don't have {choosenSoda.name}. Get your deposit back!");
+                Console.WriteLine($"I don't have {choosenSoda.name}. Get your deposit back!");
                 AddDepositToWallet();
 
+            }
+            // this statement checks register total value if there is enough money for change
+            else if (sodaMachine.registerTotalValue < customer.depositAmount)
+            {
+                Console.WriteLine($"I don't have enough money for change. Get your deposit back!");
+                AddDepositToWallet();
             }
 
             else if (choosenSoda.Cost == customer.depositAmount)
