@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SodaMachineProject
+﻿namespace SodaMachineProject
 {
+    using System;
+    using System.Collections.Generic;
+
     public class Customer
     {
         // MEMBER VARIABLES (HAS A)
         public Wallet wallet;
+
         public Backpack backpack;
+
         public List<Coin> deposit;
+
         public double depositAmount;
+
         public string userInput;
-        
+
         // CONSTRUCTOR (SPAWNER)
         public Customer()
         {
@@ -23,9 +24,10 @@ namespace SodaMachineProject
             deposit = new List<Coin>();
             depositAmount = 0;
         }
+
         // MEMBER METHODS (CAN DO)
-        
-        // 
+
+        //
         public Coin PickPayment()
         {
             Console.WriteLine("\nInsert a coin!");
@@ -55,9 +57,7 @@ namespace SodaMachineProject
             {
                 return PickPayment();
             }
-            
         }
-
 
         //this method adds cans to the backpack
         public void AddCansToBackpack(Can can)
@@ -65,64 +65,91 @@ namespace SodaMachineProject
             backpack.cans.Add(can);
         }
 
-      
-
         // method takes the coin from wallet and adds to deposit
         public Coin InsertMoney(Coin coin)
         {
             switch (userInput)
             {
-                case "1": 
+                case "1":
                     coin = wallet.coins.Find(x => x.name == "Quarter");
-                    deposit.Add(coin);
-                    CalculateDeposit();
-                    RemoveCoinFromWallet(coin);
-                    return coin;
+                    if (coin != null)
+                    {
+                        deposit.Add(coin);
+                        CalculateDeposit();
+                        RemoveCoinFromWallet(coin);
+                        return coin;
+                    }
+                    StaticUserInterface.Display($"You don't have Quarter in your wallet! Pick another one!");
+                    return InsertMoney(PickPayment());
+
                 case "2":
                     coin = wallet.coins.Find(x => x.name == "Dime");
-                    deposit.Add(coin);
-                    CalculateDeposit();
-                    RemoveCoinFromWallet(coin);
-                    return coin;
+                    if (coin != null)
+                    {
+                        deposit.Add(coin);
+                        CalculateDeposit();
+                        RemoveCoinFromWallet(coin);
+                        return coin;
+                    }
+                    StaticUserInterface.Display($"You don't have Dime in your wallet! Pick another one!");
+                    return InsertMoney(PickPayment());
+
                 case "3":
                     coin = wallet.coins.Find(x => x.name == "Nickel");
-                    deposit.Add(coin);
-                    CalculateDeposit();
-                    RemoveCoinFromWallet(coin);
-                    return coin;
+                    if (coin != null)
+                    {
+                        deposit.Add(coin);
+                        CalculateDeposit();
+                        RemoveCoinFromWallet(coin);
+                        return coin;
+                    }
+                    StaticUserInterface.Display($"You don't have Nickel in your wallet! Pick another one!");
+                    return InsertMoney(PickPayment());
+
                 case "4":
                     coin = wallet.coins.Find(x => x.name == "Penny");
-                    deposit.Add(coin);
-                    CalculateDeposit();
-                    RemoveCoinFromWallet(coin);
-                    return coin;
+                    if (coin != null)
+                    {
+                        deposit.Add(coin);
+                        CalculateDeposit();
+                        RemoveCoinFromWallet(coin);
+                        return coin;
+                    }
+                    StaticUserInterface.Display($"You don't have Penny in your wallet! Pick another one!");
+                    return InsertMoney(PickPayment());
 
                 default:
                     Console.WriteLine("Please pick money to deposit.");
                     return InsertMoney(coin);
 
             }
-            
         }
 
-       // removes coin from the wallet
+        // removes coin from the wallet
         public void RemoveCoinFromWallet(Coin coin)
         {
             wallet.coins.Remove(coin);
         }
+
         // calculates deposit
         public double CalculateDeposit()
         {
             depositAmount = 0;
             for (int i = 0; i < deposit.Count; i++)
             {
+
                 depositAmount += deposit[i].Value;
-                
+
             }
+
+
+
             return depositAmount;
         }
-
-       
     }
 }
-
+//else
+//{
+//    StaticUserInterface.Display($"You don't have more {deposit[i].name} Pick another money!");
+//    break;
+//}
