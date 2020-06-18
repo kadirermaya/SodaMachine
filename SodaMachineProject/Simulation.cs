@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SodaMachineProject
@@ -40,11 +41,22 @@ namespace SodaMachineProject
                 }
             }
             Can choosenSoda = sodaMachine.ChooseASoda();
-            if (choosenSoda.Cost == customer.depositAmount)
+            
+            // this statement gives deposit back if there is no soda in the machine
+            if (choosenSoda == null)
             {
+                Console.WriteLine($"We don't have {choosenSoda.name}. Get your deposit back!");
+                AddDepositToWallet();
+
+            }
+
+            else if (choosenSoda.Cost == customer.depositAmount)
+            {
+                
                 sodaMachine.DispenseSoda(choosenSoda);
                 customer.AddCansToBackpack(choosenSoda);
                 sodaMachine.AddDepositToRegister(customer.deposit);
+                // make the deposit empty
                 customer.deposit = new List<Coin>();
             }
             else if (choosenSoda.Cost < customer.depositAmount)
@@ -63,6 +75,8 @@ namespace SodaMachineProject
                 Console.WriteLine("You don't have enough money! Get your deposit back!");
                 AddDepositToWallet();
             }
+
+
         }
         // MEMBER METHODS (CAN DO)
 
@@ -87,6 +101,7 @@ namespace SodaMachineProject
 
         
         
+        //this method calculates the change
         public double CalculateTheChange(Can soda)
         {
             double calculatedChange = customer.depositAmount - soda.Cost;
