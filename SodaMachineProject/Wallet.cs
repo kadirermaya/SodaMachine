@@ -24,7 +24,7 @@ namespace SodaMachineProject
         // this method adds 5 dollars in a wallet
         private void AddCoinsToWallet()
         {
-            for (int i = 0; i < 11; i++)
+            for (int i = 0; i < 12; i++)
             {
             coins.Add(new Quarter());  //3 Dollars
 
@@ -41,7 +41,7 @@ namespace SodaMachineProject
             }
             for (int i = 0; i < 50; i++)
             {
-            coins.Add(new Peny());    //50 cents
+            coins.Add(new Penny());    //50 cents
 
             }
         }

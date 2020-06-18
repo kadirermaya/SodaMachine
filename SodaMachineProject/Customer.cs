@@ -28,7 +28,7 @@ namespace SodaMachineProject
         // 
         public Coin PickPayment()
         {
-            Console.WriteLine("Insert a coin to pick your soda!");
+            Console.WriteLine("\nInsert a coin!");
             Console.WriteLine("1: Quarter \n2: Dime \n3: Nickel \n4: Penny");
             userInput = Console.ReadLine();
             if (userInput == "1")
@@ -48,7 +48,7 @@ namespace SodaMachineProject
             }
             else if (userInput == "4")
             {
-                Coin coin = new Nickel();
+                Coin coin = new Penny();
                 return coin;
             }
             else
@@ -91,7 +91,7 @@ namespace SodaMachineProject
                     RemoveCoinFromWallet(coin);
                     return coin;
                 case "4":
-                    coin = wallet.coins.Find(x => x.name == "Peny");
+                    coin = wallet.coins.Find(x => x.name == "Penny");
                     deposit.Add(coin);
                     CalculateDeposit();
                     RemoveCoinFromWallet(coin);
@@ -117,9 +117,12 @@ namespace SodaMachineProject
             for (int i = 0; i < deposit.Count; i++)
             {
                 depositAmount += deposit[i].Value;
+                
             }
             return depositAmount;
         }
+
+       
     }
 }
 

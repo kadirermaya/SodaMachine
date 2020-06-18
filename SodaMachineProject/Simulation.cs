@@ -13,6 +13,8 @@ namespace SodaMachineProject
         public SodaMachine sodaMachine;
         public Customer customer;
         public bool addMoreMoney;
+        public List<Coin> change;
+        
         // CONSTRUCTOR (SPAWNER)
         public Simulation()
         {
@@ -38,11 +40,28 @@ namespace SodaMachineProject
                 }
             }
             Can choosenSoda = sodaMachine.ChooseASoda();
-            if (choosenSoda.Cost <= customer.depositAmount)
+            if (choosenSoda.Cost == customer.depositAmount)
             {
                 sodaMachine.DispenseSoda(choosenSoda);
                 customer.AddCansToBackpack(choosenSoda);
                 sodaMachine.AddDepositToRegister(customer.deposit);
+                customer.deposit = new List<Coin>();
+            }
+            else if (choosenSoda.Cost < customer.depositAmount)
+            {
+            // we need to add GiveChange to list
+                sodaMachine.DispenseSoda(choosenSoda);
+                customer.AddCansToBackpack(choosenSoda);
+                sodaMachine.AddDepositToRegister(customer.deposit);
+                double changeAmount = Math.Round(CalculateTheChange(choosenSoda), 2);
+                change = sodaMachine.GiveChange(changeAmount);
+                AddChangeToWallet();
+            }
+            else 
+            {
+             // if not enough money passed in don`t complete the transaction.
+                Console.WriteLine("You don't have enough money! Get your deposit back!");
+                AddDepositToWallet();
             }
         }
         // MEMBER METHODS (CAN DO)
@@ -56,6 +75,23 @@ namespace SodaMachineProject
             }
         }
 
+        // Adds changes to wallet
+        public void AddChangeToWallet()
+        {
+            for (int i = 0; i < change.Count; i++)
+            {
+                customer.wallet.coins.Add(change[i]);
+            }
+            change = new List<Coin>();
+        }
+
+        
+        
+        public double CalculateTheChange(Can soda)
+        {
+            double calculatedChange = customer.depositAmount - soda.Cost;
+            return calculatedChange;
+        }
 
         //else if (choosenSoda.Cost >= customer.depositAmount)
         //{

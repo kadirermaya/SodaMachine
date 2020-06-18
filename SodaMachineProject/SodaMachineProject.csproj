@@ -52,7 +52,7 @@
     <Compile Include="Coins\Dime.cs" />
     <Compile Include="Coins\Nickel.cs" />
     <Compile Include="Cans\OrangeSoda.cs" />
-    <Compile Include="Coins\Peny.cs" />
+    <Compile Include="Coins\Penny.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Coins\Quarter.cs" />
