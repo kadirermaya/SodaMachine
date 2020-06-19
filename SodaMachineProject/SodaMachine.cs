@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SodaMachineProject
+﻿namespace SodaMachineProject
 {
+    using System;
+    using System.Collections.Generic;
+
     public class SodaMachine
     {
         // MEMBER VARIABLES (HAS A)
         public List<Coin> register;
+
         public List<Can> inventory;
+
         public string userChoice;
+
+        public double registerTotalValue;
 
         // CONSTRUCTOR (SPAWNER)
         public SodaMachine()
@@ -21,15 +21,22 @@ namespace SodaMachineProject
             inventory = new List<Can>();
             AddCoinsToRegister();
             AddCansToSodaMachine();
+
+
+            for (int i = 0; i < register.Count; i++)
+            {
+                registerTotalValue += register[i].Value;
+            }
         }
 
         // MEMBER METHODS (CAN DO)
+
 
         // this method adds the coins to the register.
         public void AddCoinsToRegister()
         {
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 12; i++)
             {
                 register.Add(new Quarter());
             }
@@ -39,7 +46,7 @@ namespace SodaMachineProject
                 register.Add(new Dime());
             }
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 10; i++)
             {
                 register.Add(new Nickel());
             }
@@ -72,55 +79,36 @@ namespace SodaMachineProject
             }
         }
 
-       // displays welcome screen
-        public void WelcomeScreen()
-        {
-            Console.WriteLine("Welcome to Soda Machine. Would you like to buy Soda?");
-        }
-
-        // this method displays what the soda machine has!
-        public void DisplayInventory()
-        {
-            Console.WriteLine($"\nI have:\nRoot Beer   $0.60  \nPepsi   $0.35\nFanta   $0.06");
-            
-            //Console.WriteLine("\nInsert money and pick one.");
-
-        }
-
         // when this method called dispense soda from inventory
         public void DispenseSoda(Can can)
         {
             inventory.Remove(can);
         }
 
-
         // chooses a soda and dispense it as a can
         public Can ChooseASoda()
         {
-            Console.WriteLine($"Which one would you like to buy?");
-            Console.WriteLine("1 = Root Beer, 2 = Pepsi, 3 = Fanta");
-            userChoice = Console.ReadLine();
-            
+            userChoice = StaticUserInterface.DisplaySodaOptions();
+
             Can can;
             switch (userChoice)
             {
                 case "1":
                     can = inventory.Find(x => x.name == "Bundaberg Root Beer");
-                    
+
                     return can;
                 case "2":
                     can = inventory.Find(x => x.name == "Pepsi");
-                    
+
                     return can;
                 case "3":
                     can = inventory.Find(x => x.name == "Fanta");
-                    
+
                     return can;
-                default :
+                default:
                     Console.WriteLine("Please pick between 1-3");
                     return ChooseASoda();
             }
-
         }
 
         // Adds deposit to register
@@ -132,8 +120,8 @@ namespace SodaMachineProject
             }
         }
 
-       // gives change to user and removes change from register
-        public List<Coin> GiveChange(double changeToGive)//double parameter?
+        // gives change to user and removes change from register
+        public List<Coin> GiveChange(double changeToGive)
         {
             List<Coin> changeCoinList = new List<Coin>();
             while (changeToGive > 0)
@@ -145,11 +133,15 @@ namespace SodaMachineProject
                         for (int i = 0; i < changeToGive / 0.25; i++)
                         {
                             Coin coin = register.Find(x => x.name == "Quarter");
+                            if (coin == null)
+                            {
+                                break;
+                            }
                             changeCoinList.Add(coin);
-                            changeToGive -= 0.25;
+                            changeToGive -= coin.Value;
                             register.Remove(coin);
+                            changeToGive = Math.Round(changeToGive, 2);
                         }
-
                     }
                     else
                     {
@@ -157,12 +149,16 @@ namespace SodaMachineProject
                         for (int i = 0; i < floor; i++)
                         {
                             Coin coin = register.Find(x => x.name == "Quarter");
-                            changeCoinList.Add(coin);
-                            changeToGive -= 0.25;
+                            if (coin == null)
+                            {
+                                break;
+                            }
                             register.Remove(coin);
+                            changeToGive -= coin.Value;
+                            changeCoinList.Add(coin);
+                            changeToGive = Math.Round(changeToGive, 2);
                         }
                     }
-                   
                 }
                 else if (changeToGive / 0.10 >= 1)
                 {
@@ -171,11 +167,15 @@ namespace SodaMachineProject
                         for (int i = 0; i < changeToGive / 0.10; i++)
                         {
                             Coin coin = register.Find(x => x.name == "Dime");
-                            changeCoinList.Add(coin);
-                            changeToGive -= 0.10;
+                            if (coin == null)
+                            {
+                                break;
+                            }
                             register.Remove(coin);
+                            changeCoinList.Add(coin);
+                            changeToGive -= coin.Value;
+                            changeToGive = Math.Round(changeToGive, 2);
                         }
-
                     }
                     else
                     {
@@ -183,9 +183,14 @@ namespace SodaMachineProject
                         for (int i = 0; i < floor; i++)
                         {
                             Coin coin = register.Find(x => x.name == "Dime");
-                            changeCoinList.Add(coin);
-                            changeToGive -= 0.10;
+                            if (coin == null)
+                            {
+                                break;
+                            }
                             register.Remove(coin);
+                            changeCoinList.Add(coin);
+                            changeToGive -= coin.Value;
+                            changeToGive = Math.Round(changeToGive, 2);
                         }
                     }
                 }
@@ -196,11 +201,15 @@ namespace SodaMachineProject
                         for (int i = 0; i < changeToGive / 0.05; i++)
                         {
                             Coin coin = register.Find(x => x.name == "Nickel");
-                            changeCoinList.Add(coin);
-                            changeToGive -= 0.05;
+                            if (coin == null)
+                            {
+                                break;
+                            }
                             register.Remove(coin);
+                            changeCoinList.Add(coin);
+                            changeToGive -= coin.Value;
+                            changeToGive = Math.Round(changeToGive, 2);
                         }
-
                     }
                     else
                     {
@@ -208,41 +217,37 @@ namespace SodaMachineProject
                         for (int i = 0; i < floor; i++)
                         {
                             Coin coin = register.Find(x => x.name == "Nickel");
-                            changeCoinList.Add(coin);
-                            changeToGive -= 0.05;
+                            if (coin == null)
+                            {
+                                break;
+                            }
                             register.Remove(coin);
+                            changeCoinList.Add(coin);
+                            changeToGive -= coin.Value;
+                            changeToGive = Math.Round(changeToGive, 2);
                         }
                     }
 
                 }
                 else if (changeToGive / 0.01 >= 1)
                 {
-                    
-                        double floor = Math.Floor(changeToGive / 0.01);
-                        for (int i = 0; i < floor; i++)
+                    double floor = Math.Floor(changeToGive / 0.01);
+                    for (int i = 0; i < floor; i++)
+                    {
+                        Coin coin = register.Find(x => x.name == "Penny");
+                        if (coin == null)
                         {
-                            Coin coin = register.Find(x => x.name == "Penny");
-                            changeCoinList.Add(coin);
-                            changeToGive -= 0.01;
-                            register.Remove(coin);
+                            Console.WriteLine("Machine doesn't have enough money! Take your deposit!");
+                            return null;
                         }
-                   
-                    //look at parameter and turn it into a list of coins with that value
+                        register.Remove(coin);
+                        changeCoinList.Add(coin);
+                        changeToGive -= coin.Value;
+                        changeToGive = Math.Round(changeToGive, 2);
+                    }
                 }
-            }   
-                return changeCoinList;
+            }
+            return changeCoinList;
         }
     }
 }
-
-            
-        
-
-    
-
-        
-
-
-
-    
-
