@@ -26,20 +26,27 @@ namespace SodaMachineProject
 
         public void Run()
         {
-            sodaMachine.WelcomeScreen();
-            sodaMachine.DisplayInventory();
+            StaticUserInterface.WelcomeScreen();
+            StaticUserInterface.DisplayProducts();
             while (addMoreMoney)
             {
                 customer.InsertMoney(customer.PickPayment());
-                Console.WriteLine($"Your deposit: {customer.depositAmount}");
-                Console.WriteLine($"Would you like to add more money? Type Yes or No");
-                string userInput = Console.ReadLine().ToLower();
+                Console.Clear();
+                StaticUserInterface.WelcomeScreen();
+                StaticUserInterface.DisplayProducts();
+                Console.WriteLine($"\nYour deposit: {customer.depositAmount}");
+                string userInput = StaticUserInterface.DisplayAskAddMoreMoney();
                 if (userInput == "no")
                 {
                     addMoreMoney = false;
                     Console.WriteLine("");
+                    Console.Clear();
+                    StaticUserInterface.WelcomeScreen();
+                    StaticUserInterface.DisplayProducts();
+                    Console.WriteLine($"\nYour deposit: {customer.depositAmount}");
                 }
             }
+
             Can choosenSoda = sodaMachine.ChooseASoda();
            
             // this statement gives deposit back if there is no soda in the machine
@@ -47,41 +54,44 @@ namespace SodaMachineProject
             {
                 Console.WriteLine($"I don't have {choosenSoda.name}. Get your deposit back!");
                 AddDepositToWallet();
-
             }
-            // this statement checks register total value if there is enough money for change
-            else if (sodaMachine.registerTotalValue < customer.depositAmount)
-            {
-                Console.WriteLine($"I don't have enough money for change. Get your deposit back!");
-                AddDepositToWallet();
-            }
-
+             
             else if (choosenSoda.Cost == customer.depositAmount)
             {
                 
-                sodaMachine.DispenseSoda(choosenSoda);
-                customer.AddCansToBackpack(choosenSoda);
                 sodaMachine.AddDepositToRegister(customer.deposit);
+                sodaMachine.DispenseSoda(choosenSoda);
+                Console.WriteLine($"Enjoy with your {choosenSoda.name}");
+                customer.AddCansToBackpack(choosenSoda);
                 // make the deposit empty
                 customer.deposit = new List<Coin>();
             }
+
             else if (choosenSoda.Cost < customer.depositAmount)
             {
-            // we need to add GiveChange to list
-                sodaMachine.DispenseSoda(choosenSoda);
-                customer.AddCansToBackpack(choosenSoda);
                 sodaMachine.AddDepositToRegister(customer.deposit);
                 double changeAmount = Math.Round(CalculateTheChange(choosenSoda), 2);
                 change = sodaMachine.GiveChange(changeAmount);
-                AddChangeToWallet();
+                if (change == null)
+                {
+                    AddDepositToWallet();
+                    StaticUserInterface.DisplayRegisterHasNoChange();
+                    
+                } else
+                {
+                    sodaMachine.DispenseSoda(choosenSoda);
+                    Console.WriteLine($"Enjoy with your {choosenSoda.name}");
+                    customer.AddCansToBackpack(choosenSoda);
+                    AddChangeToWallet();
+                }
+                                
             }
             else 
             {
-             // if not enough money passed in don`t complete the transaction.
+                // if not enough money passed in don`t complete the transaction.
                 Console.WriteLine("You don't have enough money! Get your deposit back!");
                 AddDepositToWallet();
             }
-
 
         }
         // MEMBER METHODS (CAN DO)
@@ -108,40 +118,14 @@ namespace SodaMachineProject
         
         
         //this method calculates the change
-        public double CalculateTheChange(Can soda)
+        public double  CalculateTheChange(Can soda)
         {
             double calculatedChange = customer.depositAmount - soda.Cost;
+            Console.WriteLine($"\nYour change {calculatedChange}");
             return calculatedChange;
         }
 
-        //else if (choosenSoda.Cost >= customer.depositAmount)
-        //{
-        //    Console.WriteLine("You don't have enough money!");
-        //    while (choosenSoda.Cost != customer.depositAmount || choosenSoda.Cost < customer.depositAmount)
-        //    {
-        //        Console.WriteLine($"Would you like to add more money? Type Yes or No");
-        //        string userInput = Console.ReadLine().ToLower();
-        //        if(userInput == "no")
-        //        {
-        //            if (choosenSoda.Cost == customer.depositAmount || choosenSoda.Cost < customer.depositAmount)
-        //            {
-
-        //            }
-
-
-        //            else 
-        //            { 
-        //            Console.WriteLine("Get your deposit back!");
-        //            break;
-        //            }
-        //        }
-        //        else 
-        //        { 
-        //        customer.InsertMoney(customer.PickPayment());
-        //        }
-        //    }
-        //}
-
+        
     }
 }
         
